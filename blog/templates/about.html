@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+        {% block header %}
+        <h1>About</h1>
+        <span class="subheading">These are our users</span>
+        {% endblock%}
+
+        {% block content %}
+        <!-- Main Content-->
+        <main class="mb-4">
+            {% for i in users %}
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <img src="{{ i.foto.url }}" alt="user_photo" width="400px" height="400px" id="foto">
+                        <h2 class="post-title">{{ i.nome }}</h2>
+                        <p>Contato: <i>{{ i.email }}</i> <strong>ou</strong> <i>{{ i.telefone }}</i></p>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4" />
+            {% endfor %}
+        </main>
+        {% endblock %}
