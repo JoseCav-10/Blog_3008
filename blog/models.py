@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.utils import timezone
 # Create your models here.
 
 class User(models.Model):
@@ -14,4 +14,10 @@ class User(models.Model):
 class Post(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     mensage = models.TextField()
-    data_publicacao = models.DateField()
+    data_publicacao = models.DateField(editable=False)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.data = timezone.now()
+
+        return super(Post, self).save(*args, **kwargs)
