@@ -35,14 +35,9 @@ def about_user(request):
 def contact(request, *args, **kwargs):
 
     if request.method == "POST":
-        form = UserForm(request.POST)
+        form = UserForm(request.POST, request.FILES)
         if form.is_valid():
-            nome = form.cleaned_data['nome']
-            email = form.cleaned_data['email']
-            telefone = form.cleaned_data['telefone']
-            foto = form.cleaned_data['foto']
-
-            User.objects.create(nome=nome, email=email, telefone=telefone, foto=foto)
+            form.save()
             
     form = UserForm()
 
